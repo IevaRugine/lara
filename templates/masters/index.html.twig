@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Masters List{% endblock %}
+
+{% block body %}
+    <h1>Available Masters✅</h1>
+    List order by:
+      <form action="{{ path('masters_index')}}" method="GET">
+    <select name="sort">
+    <option value="default">default</option>
+    <option value="name_az"{% if sortBy=='name_az'%}selected{% endif %}>name</option>
+    <option value="name_za"{% if sortBy=='name_za'%}selected{% endif %}>name reverse</option>
+    <option value="surname_az"{% if sortBy=='surname_az'%}selected{% endif %}>surname</option>
+    <option value="surname_za"{% if sortBy=='surname_za'%}selected{% endif %}>surname reverse</option>
+    </select>
+    <button type="submit">Sort IT!</button>
+    </form>
+    <a href="{{ path('masters_index')}}" >CLEAR</a>
+    <ul>
+    {% for master in masters %}
+        <li>
+        {{master.name}} {{master.surname}}
+        <a href="{{ path('masters_edit', {id: master.id}) }}">EDIT</a>
+        <form action="{{ path('masters_delete', {id: master.id}) }}" method="POST">
+        <button type="submit">DELETE</button>
+        </form>
+            {% for outfit in master.outfits %}
+            {{outfit.type}}<br>
+            {% endfor %}
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ path('masters_create') }}">GO TO CREATE MASTER</a>
+    <a href="{{ path('outfits_create') }}">GO TO CREATE OUTFIT</a>
+{% endblock %}

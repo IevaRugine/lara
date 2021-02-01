@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Outfit{% endblock %}
+
+{% block body %}
+    <h1>Edit Outfit ✅</h1>
+    <form action="{{path('outfits_update', {id: outfit.id})}}" method="POST">
+        Type:<input type="text" name="outfit_type" value="{{outfit.type}}">
+        Color:<input type="text" name="outfit_color" value="{{outfit.color}}">
+        Size:<input type="text" name="outfit_size" value="{{outfit.size}}">
+        About:<textarea name="outfit_about">{{outfit.about}}</textarea>
+        <select name="outfits_master">
+        {% for master in masters %}
+        <option value="{{master.id}}" {% if master.id == outfit.masterId %} selected {% endif %}>
+        {{master.name}} {{master.surname}}
+        </option>
+        {% endfor %}
+        </select>
+        <button type="submit">Edit Outfit</button>
+    </form>
+{% endblock %}

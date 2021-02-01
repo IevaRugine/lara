@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new Master{% endblock %}
+
+{% block body %}
+    <h1>Create new Master ✅</h1>
+    <form action="{{path('masters_store')}}" method="POST">
+        Name:<input type="text" name="master_name">
+        Surname:<input type="text" name="master_surname">
+        <button type="submit">Add new Master</button>
+    </form>
+{% endblock %}
